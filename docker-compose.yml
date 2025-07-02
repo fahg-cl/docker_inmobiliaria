@@ -1,0 +1,19 @@
+services:
+  web:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  db:  # <- ahora sí dentro del bloque 'services'
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: inmobiliaria
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
